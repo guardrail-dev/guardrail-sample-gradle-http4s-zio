@@ -39,6 +39,9 @@ dependencies {
     implementation 'org.http4s:http4s-circe_2.13:0.21.19'
     implementation 'org.http4s:http4s-dsl_2.13:0.21.19'
 
+    implementation 'dev.zio:zio_2.13:1.0.4-2'
+    implementation 'dev.zio:zio-interop-cats_2.13:2.2.0.1'
+
     // "org.scalatest"    %% "scalatest"             % scalatestVersion % Test,
 
     // Align versions of all Kotlin components
@@ -56,15 +59,15 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'guardrail.gradle.sample.http4s.AppKt'
+    mainClassName = 'example.App'
 }
 
 guardrail {
     // generate a server stub in scala with http4s resources
     petstoreServer {
-        inputFile = file('src/main/resources/server1.yaml')
+        inputFile = file('src/main/resources/server.yaml')
         gen {
-            packageName = 'com.foobar.generated.petstore.server'
+            packageName = 'example.server'
             kind = 'server'
             language = 'scala'
             framework = 'http4s'
