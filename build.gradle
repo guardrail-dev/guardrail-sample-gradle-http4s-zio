@@ -22,6 +22,25 @@ repositories {
 }
 
 dependencies {
+    // Scala version
+    implementation 'org.scala-lang:scala-library:2.13.4'
+
+    // cats
+    implementation 'org.typelevel:cats-core_2.13:2.3.1'
+    implementation 'org.typelevel:cats-effect_2.13:2.3.3'
+
+    // circe
+    implementation 'io.circe:circe-core_2.13:0.13.0'
+    implementation 'io.circe:circe-parser_2.13:0.13.0'
+
+    // http4s
+    implementation 'org.http4s:http4s-blaze-client_2.13:0.21.19'
+    implementation 'org.http4s:http4s-blaze-server_2.13:0.21.19'
+    implementation 'org.http4s:http4s-circe_2.13:0.21.19'
+    implementation 'org.http4s:http4s-dsl_2.13:0.21.19'
+
+    // "org.scalatest"    %% "scalatest"             % scalatestVersion % Test,
+
     // Align versions of all Kotlin components
     implementation platform('org.jetbrains.kotlin:kotlin-bom')
 
@@ -41,14 +60,19 @@ application {
 }
 
 guardrail {
-    // generate a server stub in java with dropwizard resources
+    // generate a server stub in scala with http4s resources
     petstoreServer {
         inputFile = file('src/main/resources/server1.yaml')
         gen {
             packageName = 'com.foobar.generated.petstore.server'
             kind = 'server'
-            language = 'java'
-            framework = 'dropwizard'
+            language = 'scala'
+            framework = 'http4s'
         }
     }
 }
+
+compileJava.dependsOn guardrail.petstoreServer.gen
+
+// sourceSets.main.scala.srcDirs += 'build/guardrail-sources/scala'
+sourceSets.main.scala.srcDirs += new File(buildDir, 'guardrail-sources/scala')
