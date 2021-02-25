@@ -26,6 +26,10 @@ ext {
     scalaVersion = '2.13'
 }
 
+configurations {
+    kindProjectorPlugin
+}
+
 dependencies {
     // Scala version
     implementation "org.scala-lang:scala-library:${scalaVersionFull}"
@@ -60,6 +64,8 @@ dependencies {
 
     // Use the Kotlin JUnit integration.
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
+
+    kindProjectorPlugin group: 'org.typelevel', name: "kind-projector_${scalaVersionFull}", version: '0.11.3'
 }
 
 application {
@@ -84,3 +90,9 @@ compileJava.dependsOn guardrail.petstoreServer.gen
 
 // sourceSets.main.scala.srcDirs += 'build/guardrail-sources/scala'
 sourceSets.main.scala.srcDirs += new File(buildDir, 'guardrail-sources/scala')
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.additionalParameters = [
+        "-Xplugin:" + configurations.kindProjectorPlugin.asPath,
+    ]
+}
