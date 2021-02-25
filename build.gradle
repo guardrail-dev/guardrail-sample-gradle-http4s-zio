@@ -21,26 +21,31 @@ repositories {
     gradlePluginPortal()
 }
 
+ext {
+    scalaVersionFull = '2.13.5'
+    scalaVersion = '2.13'
+}
+
 dependencies {
     // Scala version
-    implementation 'org.scala-lang:scala-library:2.13.4'
+    implementation "org.scala-lang:scala-library:${scalaVersionFull}"
 
     // cats
-    implementation 'org.typelevel:cats-core_2.13:2.3.1'
-    implementation 'org.typelevel:cats-effect_2.13:2.3.3'
+    implementation "org.typelevel:cats-core_${scalaVersion}:2.3.1"
+    implementation "org.typelevel:cats-effect_${scalaVersion}:2.3.3"
 
     // circe
-    implementation 'io.circe:circe-core_2.13:0.13.0'
-    implementation 'io.circe:circe-parser_2.13:0.13.0'
+    implementation "io.circe:circe-core_${scalaVersion}:0.13.0"
+    implementation "io.circe:circe-parser_${scalaVersion}:0.13.0"
 
     // http4s
-    implementation 'org.http4s:http4s-blaze-client_2.13:0.21.19'
-    implementation 'org.http4s:http4s-blaze-server_2.13:0.21.19'
-    implementation 'org.http4s:http4s-circe_2.13:0.21.19'
-    implementation 'org.http4s:http4s-dsl_2.13:0.21.19'
+    implementation "org.http4s:http4s-blaze-client_${scalaVersion}:0.21.19"
+    implementation "org.http4s:http4s-blaze-server_${scalaVersion}:0.21.19"
+    implementation "org.http4s:http4s-circe_${scalaVersion}:0.21.19"
+    implementation "org.http4s:http4s-dsl_${scalaVersion}:0.21.19"
 
-    implementation 'dev.zio:zio_2.13:1.0.4-2'
-    implementation 'dev.zio:zio-interop-cats_2.13:2.2.0.1'
+    implementation "dev.zio:zio_${scalaVersion}:1.0.4-2"
+    implementation "dev.zio:zio-interop-cats_${scalaVersion}:2.2.0.1"
 
     // "org.scalatest"    %% "scalatest"             % scalatestVersion % Test,
 
